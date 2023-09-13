@@ -15,6 +15,10 @@ export const USER_ACTION_TYPES = {
   SET_CURRENT_USER: 'SET_CURRENT_USER',
 };
 
+const INITIAL_STATE = {
+  currentUser: null,
+};
+
 // Using reducer hook:
 const userReducer = (state, action) => {
   console.log('dispatched');
@@ -32,16 +36,11 @@ const userReducer = (state, action) => {
   }
 };
 
-const INITIAL_STATE = {
-  currentUser: null,
-};
-
 export const UserProvider = ({ children }) => {
-  // const [currentUser, setCurrentUser] = useState(null);
 
   // const { currentUser } = state; => same as below const[{state}, dispatch]
   const [{ currentUser }, dispatch] = useReducer(userReducer, INITIAL_STATE);
-  console.log(currentUser);
+  
   const setCurrentUser = (user) => {
     dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
   };
