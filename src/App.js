@@ -9,6 +9,7 @@ import {
 } from './utils/firebase/firebase.utils';
 import { setCurrentUser } from './store/user/user.action';
 
+
 import Shop from './routes/shop/shop.component';
 import Home from './routes/home/home.component';
 import Navigation from './routes/navigation/navigation.component';
@@ -20,6 +21,7 @@ import Checkout from './routes/checkout/checkout.component';
 
 const App = () => {
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
