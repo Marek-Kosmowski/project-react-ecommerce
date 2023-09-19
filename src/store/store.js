@@ -17,7 +17,7 @@ import {
 /*
 middlewares => kind of like little library helpers, that run before an action hits the reducer, so whenever you dispatch an action, before that action hits the reducers, it hits the middleware first
 */
-const middleWares = [logger]
+const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(Boolean);
 
 
 const persistConfig = {
