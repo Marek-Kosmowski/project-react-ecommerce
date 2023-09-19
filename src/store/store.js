@@ -17,7 +17,7 @@ import {
 /*
 middlewares => kind of like little library helpers, that run before an action hits the reducer, so whenever you dispatch an action, before that action hits the reducers, it hits the middleware first
 */
-const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(Boolean);
+const middleWares = [process.env.NODE_ENV !== 'production' && logger].filter(Boolean);
 
 
 const persistConfig = {
@@ -26,9 +26,11 @@ const persistConfig = {
     blacklist: ['user'],
 }
 
+const composeEnhancer = (process.env.NODE_ENV !== 'production' && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const composedEnhancers = compose(applyMiddleware(...middleWares));
+const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
 export const store = createStore(persistedReducer, undefined, composedEnhancers);
 
